@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Dict
+from typing import Mapping
 
 import os
 import pkg_resources
@@ -23,7 +23,7 @@ class bag2_digital__pmos4_stack(Module):
         Module.__init__(self, database, self.yaml_file, parent=parent, prj=prj, **kwargs)
 
     @classmethod
-    def get_params_info(cls):
+    def get_params_info(cls) -> Mapping[str,str]:
         # type: () -> Dict[str, str]
         """Returns a dictionary from parameter names to descriptions.
 
@@ -33,9 +33,15 @@ class bag2_digital__pmos4_stack(Module):
             dictionary from parameter names to descriptions.
         """
         return dict(
+            lch = 'Channel length in resolution units',
+            w = 'Channel width in resolution units',
+            stack = 'Number of stacked devices',
+            intent = 'Threshold flavor',
+            seg = 'Number of segments per device.',
+            export_mid = 'True to export intermediate nodes',
         )
 
-    def design(self):
+    def design(self, **params) -> None:
         """To be overridden by subclasses to design this module.
 
         This method should fill in values for all parameters in
@@ -51,5 +57,34 @@ class bag2_digital__pmos4_stack(Module):
         restore_instance()
         array_instance()
         """
-        pass
+        lch = params['lch']
+        w = params['w']
+        stack = params['stack']
+        intent = params['intent']
+        seg = params['seg']
+        export_mid = params['export_mid']
 
+        # Designing instances
+        self.instances['XP'].design(w=w, l=lch, nf=seg, intent=intent)
+
+        if stack > 1:
+            # Getting new connections with the stack
+            if stack == 2:
+                mid_name = 'm'
+            else:
+                mid_name = ','.join([f'm<{i}>' for i in range(stack-1)])
+
+            d_conn = ','.join([mid_name, 'D'])
+            s_conn = ','.join(['S', mid_name])
+            g_conn = f'G<{stack-1}:0>'
+            term_list = [dict(D=d_conn, S=s_conn, G=g_conn)]
+
+            # Renaming instances
+            self.array_instance('XP', [f'XP<{stack-1}:0>'], term_list=term_list)
+
+            # Renaming pins
+            self.rename_pin('G', f'G<{stack-1}:0>')
+
+            if export_mid:
+                suffix_mid = '' if stack == 2 else f'<{stack-2}:0>'
+                self.add_pin(f'm{suffix_mid}', 'inputOutput')

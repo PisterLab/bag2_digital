@@ -2,7 +2,7 @@ lib_name: bag2_digital
 cell_name: pmos4_stack
 pins: [ "G", "B", "D", "S" ]
 instances:
-  X0:
+  XP:
     lib_name: BAG_prim
     cell_name: pmos4_svt
     instpins:
