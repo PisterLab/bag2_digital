@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Dict
+from typing import Mapping, Any
 
 import os
 import pkg_resources
@@ -43,13 +43,13 @@ class bag2_digital__nand(Module):
             num_in = 'Number of inputs',
         )
 
-    @classmethod
-    def get_default_params_info(cls) -> Mapping[str,Any]:
-        return dict(
-                seg_n=1,
-                seg_p=1,
-                num_in=2,
-            )
+    # @classmethod
+    # def get_default_params_info(cls) -> Mapping[str,Any]:
+    #     return dict(
+    #             seg_n=1,
+    #             seg_p=1,
+    #             num_in=2,
+    #         )
 
     def design(self, **params):
         """To be overridden by subclasses to design this module.
@@ -75,22 +75,27 @@ class bag2_digital__nand(Module):
 
         # Design instancess
         self.instances['XN'].design(
-            lch=params['lch'],
-            w=params['w_n'],
-            stack=num_in,
-            intent=params['th_n'],
-            seg=params['seg_n'])
+            lch = params['lch'],
+            w = params['w_n'],
+            stack = num_in,
+            intent = params['th_n'],
+            seg = params['seg_n'],
+            export_mid = False)
 
-        self.reconnect_instance_terminal('XN', 'G', f'in{suffix_in}')
+        self.reconnect_instance_terminal('XN', f'G{suffix_in}', f'in{suffix_in}')
 
         self.instances['XP'].design(
-            lch=params['lch'],
-            w=params['w_n'],
-            stack=1,
-            intent=params['th_p'],
-            seg=params['seg_p'])
+            lch = params['lch'],
+            w = params['w_p'],
+            stack = 1,
+            intent = params['th_p'],
+            seg = params['seg_p'],
+            export_mid = False)
 
-        self.array_instance('XP', [f'XP{suffix_in}'], term_list=[dict(G=f'in{suffix_in}')])
+        self.array_instance('XP', [f'XP{suffix_in}'], term_list=[dict(G=f'in{suffix_in}',
+                                                                      D='out',
+                                                                      S='VDD',
+                                                                      B='VDD')])
 
         # Rename pins appropriately
         self.rename_pin('in', f'in{suffix_in}')

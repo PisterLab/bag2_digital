@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Mapping
+from typing import Mapping, Any
 
 import os
 import pkg_resources
@@ -40,6 +40,14 @@ class bag2_digital__nmos4_stack(Module):
             seg = 'Number of segments per device.',
             export_mid = 'True to export intermediate nodes',
         )
+
+    @classmethod
+    def get_default_params_info(cls) -> Mapping[str,Any]:
+        return dict(
+                stack = 1,
+                seg = 1, 
+                export_mid = False
+            )
 
     def design(self, **params) -> None:
         """To be overridden by subclasses to design this module.

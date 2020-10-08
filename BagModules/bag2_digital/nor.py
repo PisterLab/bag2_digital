@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Dict
+from typing import Mapping, Any
 
 import os
 import pkg_resources
@@ -33,9 +33,25 @@ class bag2_digital__nor(Module):
             dictionary from parameter names to descriptions.
         """
         return dict(
+            seg_n = 'NMOS number of fingers',
+            seg_p = 'PMOS number of fingers',
+            w_n = 'NMOS width',
+            w_p = 'PMOS width',
+            th_n = 'NMOS threshold flavor',
+            th_p = 'PMOS threshold flavor',
+            lch = 'Channel length',
+            num_in = 'Number of inputs',
         )
 
-    def design(self):
+    # @classmethod
+    # def get_default_params_info(cls) -> Mapping[str,Any]:
+    #     return dict(
+    #             seg_n=1,
+    #             seg_p=1,
+    #             num_in=2,
+    #         )
+
+    def design(self, **params):
         """To be overridden by subclasses to design this module.
 
         This method should fill in values for all parameters in
@@ -51,5 +67,35 @@ class bag2_digital__nor(Module):
         restore_instance()
         array_instance()
         """
-        pass
+        num_in = params['num_in']
 
+        assert num_in > 1, 'Number of inputs must be > 1'
+
+        suffix_in = f'<{num_in-1}:0>'
+
+        # Design instancess
+        self.instances['XP'].design(
+            lch = params['lch'],
+            w = params['w_p'],
+            stack = num_in,
+            intent = params['th_p'],
+            seg = params['seg_p'],
+            export_mid = False)
+
+        self.reconnect_instance_terminal('XP', f'G{suffix_in}', f'in{suffix_in}')
+
+        self.instances['XN'].design(
+            lch = params['lch'],
+            w = params['w_n'],
+            stack = 1,
+            intent = params['th_n'],
+            seg = params['seg_n'],
+            export_mid = False)
+
+        self.array_instance('XN', [f'XN{suffix_in}'], term_list=[dict(G=f'in{suffix_in}',
+                                                                      D='out',
+                                                                      S='VSS',
+                                                                      B='VSS')])
+
+        # Rename pins appropriately
+        self.rename_pin('in', f'in{suffix_in}')
