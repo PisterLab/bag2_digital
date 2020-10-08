@@ -1,0 +1,60 @@
+lib_name: bag2_digital
+cell_name: nor
+pins: [ "VSS", "VDD", "in", "out" ]
+instances:
+  XN:
+    lib_name: bag2_digital
+    cell_name: nmos4_stack
+    instpins:
+      D:
+        direction: inputOutput
+        net_name: "out"
+        num_bits: 1
+      S:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "in"
+        num_bits: 1
+  XP:
+    lib_name: bag2_digital
+    cell_name: pmos4_stack
+    instpins:
+      D:
+        direction: inputOutput
+        net_name: "out"
+        num_bits: 1
+      S:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "in"
+        num_bits: 1
+  PIN0:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN1:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN2:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN3:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
