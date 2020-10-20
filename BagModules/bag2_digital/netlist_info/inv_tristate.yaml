@@ -1,10 +1,10 @@
 lib_name: bag2_digital
-cell_name: inv
-pins: [ "VSS", "VDD", "in", "out" ]
+cell_name: inv_tristate
+pins: [ "VDD", "VSS", "in", "out", "VN", "VP" ]
 instances:
-  XN:
-    lib_name: bag2_digital
-    cell_name: nmos4_stack
+  XP:
+    lib_name: bag2_analog
+    cell_name: pmos4_astack
     instpins:
       D:
         direction: inputOutput
@@ -12,23 +12,31 @@ instances:
         num_bits: 1
       S:
         direction: inputOutput
-        net_name: "VSS"
+        net_name: "VDD"
         num_bits: 1
       B:
         direction: inputOutput
-        net_name: "VSS"
+        net_name: "VDD"
         num_bits: 1
       G:
         direction: inputOutput
         net_name: "in"
         num_bits: 1
+  PIN1:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
   PIN0:
     lib_name: basic
     cell_name: iopin
     instpins: {}
-  PIN1:
+  PIN5:
     lib_name: basic
-    cell_name: iopin
+    cell_name: ipin
+    instpins: {}
+  PIN4:
+    lib_name: basic
+    cell_name: ipin
     instpins: {}
   PIN2:
     lib_name: basic
@@ -38,9 +46,9 @@ instances:
     lib_name: basic
     cell_name: opin
     instpins: {}
-  XP:
-    lib_name: bag2_digital
-    cell_name: pmos4_stack
+  XN:
+    lib_name: bag2_analog
+    cell_name: nmos4_astack
     instpins:
       D:
         direction: inputOutput
@@ -48,11 +56,11 @@ instances:
         num_bits: 1
       S:
         direction: inputOutput
-        net_name: "VDD"
+        net_name: "VSS"
         num_bits: 1
       B:
         direction: inputOutput
-        net_name: "VDD"
+        net_name: "VSS"
         num_bits: 1
       G:
         direction: inputOutput

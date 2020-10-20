@@ -78,10 +78,19 @@ class bag2_digital__inv(Module):
             export_mid = False)
 
         # Rewire as necessary
-        if params['stack_p'] > 1:
-            suffix_p = f"<{params['stack_p']-1}:0>"
-            self.reconnect_instance_terminal('XP', f'G{suffix_p}', 'in')
+        stack_n = params['stack_n']
+        stack_p = params['stack_p']
 
-        if params['stack_n'] > 1:
-            suffix_n = f"<{params['stack_n']-1}:0>"
-            self.reconnect_instance_terminal('XN', f'G{suffix_n}', 'in')
+        if stack_p > 1:
+            suffix_p = f"<{stack_p-1}:0>"
+            suffix_gp = f'<{stack_p-2}:0>' if stack_p > 2 else ''
+            g_p = f'VP{suffix_gp},in'
+            self.add_pin(f'VP{suffix_gp}', 'input')
+            self.reconnect_instance_terminal('XP', f'G{suffix_p}', g_p)
+
+        if stack_n > 1:
+            suffix_n = f"<{stack_n-1}:0>"
+            suffix_gn = f'<{stack_n-2}:0>' if stack_n > 2 else ''
+            g_n = f'VN{suffix_gn},in'
+            self.add_pin(f'VN{suffix_gn}', 'input')
+            self.reconnect_instance_terminal('XN', f'G{suffix_n}', g_n)
