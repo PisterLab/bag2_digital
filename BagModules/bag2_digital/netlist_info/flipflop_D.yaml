@@ -1,0 +1,156 @@
+lib_name: bag2_digital
+cell_name: flipflop_D
+pins: [ "VDD", "VSS", "D", "CLK", "Q", "Qb", "SETb", "CLRb" ]
+instances:
+  PIN1:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN0:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN7:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN6:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN3:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN2:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN5:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN4:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  XQ:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "Q"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net06"
+        num_bits: 1
+  XQb:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "Qb"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net05"
+        num_bits: 1
+  XS:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "S"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net12"
+        num_bits: 1
+  XSb:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "Sb"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net11"
+        num_bits: 1
+  XR:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "R"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net9"
+        num_bits: 1
+  XRb:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "Rb"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net10"
+        num_bits: 1

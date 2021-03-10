@@ -1,0 +1,116 @@
+lib_name: bag2_digital
+cell_name: latch_D
+pins: [ "D", "Q", "Qb", "VDD", "VSS", "CLK" ]
+instances:
+  XINV:
+    lib_name: bag2_digital
+    cell_name: inv
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "Db"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "D"
+        num_bits: 1
+  XNANDRb:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "Rb"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net1"
+        num_bits: 1
+  XNANDSb:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "Sb"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net2"
+        num_bits: 1
+  PIN1:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN0:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN3:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN2:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN5:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN4:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  XLATCH:
+    lib_name: bag2_digital
+    cell_name: latch_SbRb
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      Q:
+        direction: output
+        net_name: "Q"
+        num_bits: 1
+      Qb:
+        direction: output
+        net_name: "Qb"
+        num_bits: 1
+      Rb:
+        direction: input
+        net_name: "Rb"
+        num_bits: 1
+      Sb:
+        direction: input
+        net_name: "Sb"
+        num_bits: 1

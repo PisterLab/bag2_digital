@@ -9,14 +9,14 @@ from bag.design.module import Module
 
 
 # noinspection PyPep8Naming
-class bag2_digital__latch_SRb(Module):
-    """Module for library bag2_digital cell latch_SRb.
+class bag2_digital__latch_SbRb(Module):
+    """Module for library bag2_digital cell latch_SbRb.
 
     Fill in high level description here.
     """
     yaml_file = pkg_resources.resource_filename(__name__,
                                                 os.path.join('netlist_info',
-                                                             'latch_SRb.yaml'))
+                                                             'latch_SbRb.yaml'))
 
 
     def __init__(self, database, parent=None, prj=None, **kwargs):
