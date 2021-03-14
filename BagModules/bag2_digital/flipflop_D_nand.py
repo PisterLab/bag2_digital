@@ -9,14 +9,14 @@ from bag.design.module import Module
 
 
 # noinspection PyPep8Naming
-class bag2_digital__flipflop_D(Module):
-    """Module for library bag2_digital cell flipflop_D.
+class bag2_digital__flipflop_D_nand(Module):
+    """Module for library bag2_digital cell flipflop_D_nand.
 
     Fill in high level description here.
     """
     yaml_file = pkg_resources.resource_filename(__name__,
                                                 os.path.join('netlist_info',
-                                                             'flipflop_D.yaml'))
+                                                             'flipflop_D_nand.yaml'))
 
 
     def __init__(self, database, parent=None, prj=None, **kwargs):
