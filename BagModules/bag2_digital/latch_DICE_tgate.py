@@ -9,21 +9,21 @@ from bag.design.module import Module
 
 
 # noinspection PyPep8Naming
-class bag2_digital__latch_DICE(Module):
-    """Module for library bag2_digital cell latch_DICE.
+class bag2_digital__latch_DICE_tgate(Module):
+    """Module for library bag2_digital cell latch_DICE_tgate.
 
     Fill in high level description here.
     """
     yaml_file = pkg_resources.resource_filename(__name__,
                                                 os.path.join('netlist_info',
-                                                             'latch_DICE.yaml'))
+                                                             'latch_DICE_tgate.yaml'))
 
 
     def __init__(self, database, parent=None, prj=None, **kwargs):
         Module.__init__(self, database, self.yaml_file, parent=parent, prj=prj, **kwargs)
 
     @classmethod
-    def get_params_info(cls) -> Mapping[str,str]:
+    def get_params_info(cls) -> Mapping[str, str]:
         # type: () -> Dict[str, str]
         """Returns a dictionary from parameter names to descriptions.
 
@@ -33,10 +33,10 @@ class bag2_digital__latch_DICE(Module):
             dictionary from parameter names to descriptions.
         """
         return dict(
-            l_dict = 'Channel length dictionary (sw, latch_n, latch_p)',
-            w_dict = 'Channel width dictionary (sw, latch_n, latch_p)',
-            th_dict = 'Device flavor dictionary (sw, latch_n, latch_p)',
-            seg_dict = 'Number of fingers dictionary (sw, latch_n, latch_p)'
+            l_dict='Channel length dictionary (sw, latch_n, latch_p)',
+            w_dict='Channel width dictionary (sw, latch_n, latch_p)',
+            th_dict='Device flavor dictionary (sw, latch_n, latch_p)',
+            seg_dict='Number of fingers dictionary (sw, latch_n, latch_p)'
         )
 
     def design(self, **params):

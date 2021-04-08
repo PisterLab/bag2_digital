@@ -1,0 +1,136 @@
+lib_name: bag2_digital
+cell_name: flipflop_DICE
+pins: [ "D_IN", "Q_OUT", "Qb_OUT", "VDD", "VSS", "CLK_IN", "CLKb_IN" ]
+instances:
+  XINV_CLKb:
+    lib_name: bag2_digital
+    cell_name: inv
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "CLKbb"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "CLKb_IN"
+        num_bits: 1
+  XINV_CLK:
+    lib_name: bag2_digital
+    cell_name: inv
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "CLKb"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "CLK_IN"
+        num_bits: 1
+  PIN6:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN1:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN0:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN3:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN2:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN5:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN4:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  XS:
+    lib_name: bag2_digital
+    cell_name: latch_DICE_clk_sel
+    instpins:
+      CLKb:
+        direction: input
+        net_name: "CLKb"
+        num_bits: 1
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      Q:
+        direction: output
+        net_name: "Q_OUT"
+        num_bits: 1
+      Qb:
+        direction: output
+        net_name: "Qb_OUT"
+        num_bits: 1
+      CLK:
+        direction: input
+        net_name: "CLKbb"
+        num_bits: 1
+      D:
+        direction: input
+        net_name: "Qm"
+        num_bits: 1
+  XM:
+    lib_name: bag2_digital
+    cell_name: latch_DICE_clk_sel
+    instpins:
+      CLKb:
+        direction: input
+        net_name: "CLK_IN"
+        num_bits: 1
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      Q:
+        direction: output
+        net_name: "Qm"
+        num_bits: 1
+      Qb:
+        direction: output
+        net_name: "net4"
+        num_bits: 1
+      CLK:
+        direction: input
+        net_name: "CLKb_IN"
+        num_bits: 1
+      D:
+        direction: input
+        net_name: "D_IN"
+        num_bits: 1
