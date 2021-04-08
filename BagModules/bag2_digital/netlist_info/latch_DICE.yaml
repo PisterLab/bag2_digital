@@ -1,0 +1,228 @@
+lib_name: bag2_digital
+cell_name: latch_DICE
+pins: [ "D", "CLK", "Q", "Qb", "VDD", "VSS" ]
+instances:
+  N2:
+    lib_name: BAG_prim
+    cell_name: nmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "M"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "Mb"
+        num_bits: 1
+  N3:
+    lib_name: BAG_prim
+    cell_name: nmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "Mb"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "Q"
+        num_bits: 1
+  N0:
+    lib_name: BAG_prim
+    cell_name: nmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "Q"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "Qb"
+        num_bits: 1
+  N1:
+    lib_name: BAG_prim
+    cell_name: nmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "Qb"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "M"
+        num_bits: 1
+  N4:
+    lib_name: BAG_prim
+    cell_name: nmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "D"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "Q"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "CLK"
+        num_bits: 1
+  N5:
+    lib_name: BAG_prim
+    cell_name: nmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "D"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "M"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "CLK"
+        num_bits: 1
+  PIN1:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN0:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN3:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN2:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  P2:
+    lib_name: BAG_prim
+    cell_name: pmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "M"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "Qb"
+        num_bits: 1
+  P3:
+    lib_name: BAG_prim
+    cell_name: pmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "Mb"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "M"
+        num_bits: 1
+  P0:
+    lib_name: BAG_prim
+    cell_name: pmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "Q"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "Mb"
+        num_bits: 1
+  P1:
+    lib_name: BAG_prim
+    cell_name: pmos4_standard
+    instpins:
+      S:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "Qb"
+        num_bits: 1
+      B:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      G:
+        direction: inputOutput
+        net_name: "Q"
+        num_bits: 1
+  PIN5:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN4:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}

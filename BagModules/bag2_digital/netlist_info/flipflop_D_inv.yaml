@@ -2,118 +2,6 @@ lib_name: bag2_digital
 cell_name: flipflop_D_inv
 pins: [ "CLK", "D", "VDD", "VSS", "Q" ]
 instances:
-  XTG_M<0>:
-    lib_name: bag2_analog
-    cell_name: switch
-    instpins:
-      BN:
-        direction: input
-        net_name: "VSS"
-        num_bits: 1
-      CTRLb:
-        direction: input
-        net_name: "CLKbb"
-        num_bits: 1
-      CTRL:
-        direction: input
-        net_name: "CLKb"
-        num_bits: 1
-      BP:
-        direction: input
-        net_name: "VDD"
-        num_bits: 1
-      S:
-        direction: inputOutput
-        net_name: "net1"
-        num_bits: 1
-      D:
-        direction: inputOutput
-        net_name: "D"
-        num_bits: 1
-  XTG_S<1>:
-    lib_name: bag2_analog
-    cell_name: switch
-    instpins:
-      BN:
-        direction: input
-        net_name: "VSS"
-        num_bits: 1
-      CTRLb:
-        direction: input
-        net_name: "CLKbb"
-        num_bits: 1
-      CTRL:
-        direction: input
-        net_name: "CLKb"
-        num_bits: 1
-      BP:
-        direction: input
-        net_name: "VDD"
-        num_bits: 1
-      S:
-        direction: inputOutput
-        net_name: "net3"
-        num_bits: 1
-      D:
-        direction: inputOutput
-        net_name: "net7"
-        num_bits: 1
-  XTG_S<0>:
-    lib_name: bag2_analog
-    cell_name: switch
-    instpins:
-      BN:
-        direction: input
-        net_name: "VSS"
-        num_bits: 1
-      CTRLb:
-        direction: input
-        net_name: "CLKb"
-        num_bits: 1
-      CTRL:
-        direction: input
-        net_name: "CLKbb"
-        num_bits: 1
-      BP:
-        direction: input
-        net_name: "VDD"
-        num_bits: 1
-      S:
-        direction: inputOutput
-        net_name: "net3"
-        num_bits: 1
-      D:
-        direction: inputOutput
-        net_name: "net2"
-        num_bits: 1
-  XTG_M<1>:
-    lib_name: bag2_analog
-    cell_name: switch
-    instpins:
-      BN:
-        direction: input
-        net_name: "VSS"
-        num_bits: 1
-      CTRLb:
-        direction: input
-        net_name: "CLKb"
-        num_bits: 1
-      CTRL:
-        direction: input
-        net_name: "CLKbb"
-        num_bits: 1
-      BP:
-        direction: input
-        net_name: "VDD"
-        num_bits: 1
-      S:
-        direction: inputOutput
-        net_name: "net1"
-        num_bits: 1
-      D:
-        direction: inputOutput
-        net_name: "net5"
-        num_bits: 1
   XINV_M<0>:
     lib_name: bag2_digital
     cell_name: inv
@@ -128,11 +16,11 @@ instances:
         num_bits: 1
       out:
         direction: output
-        net_name: "net2"
+        net_name: "D1b"
         num_bits: 1
       in:
         direction: input
-        net_name: "net1"
+        net_name: "D1"
         num_bits: 1
   XINV_S<1>:
     lib_name: bag2_digital
@@ -172,7 +60,7 @@ instances:
         num_bits: 1
       in:
         direction: input
-        net_name: "net3"
+        net_name: "Qb"
         num_bits: 1
   XINV_M<1>:
     lib_name: bag2_digital
@@ -192,7 +80,7 @@ instances:
         num_bits: 1
       in:
         direction: input
-        net_name: "net2"
+        net_name: "D1b"
         num_bits: 1
   PIN1:
     lib_name: basic
@@ -237,4 +125,116 @@ instances:
       in:
         direction: input
         net_name: "CLK"
+        num_bits: 1
+  XTG_M<0>:
+    lib_name: bag2_analog
+    cell_name: switch_mos
+    instpins:
+      BN:
+        direction: input
+        net_name: "VSS"
+        num_bits: 1
+      CTRLb:
+        direction: input
+        net_name: "CLKbb"
+        num_bits: 1
+      CTRL:
+        direction: input
+        net_name: "CLKb"
+        num_bits: 1
+      BP:
+        direction: input
+        net_name: "VDD"
+        num_bits: 1
+      S:
+        direction: inputOutput
+        net_name: "D1"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "D"
+        num_bits: 1
+  XTG_S<1>:
+    lib_name: bag2_analog
+    cell_name: switch_mos
+    instpins:
+      BN:
+        direction: input
+        net_name: "VSS"
+        num_bits: 1
+      CTRLb:
+        direction: input
+        net_name: "CLKbb"
+        num_bits: 1
+      CTRL:
+        direction: input
+        net_name: "CLKb"
+        num_bits: 1
+      BP:
+        direction: input
+        net_name: "VDD"
+        num_bits: 1
+      S:
+        direction: inputOutput
+        net_name: "Qb"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "net7"
+        num_bits: 1
+  XTG_S<0>:
+    lib_name: bag2_analog
+    cell_name: switch_mos
+    instpins:
+      BN:
+        direction: input
+        net_name: "VSS"
+        num_bits: 1
+      CTRLb:
+        direction: input
+        net_name: "CLKb"
+        num_bits: 1
+      CTRL:
+        direction: input
+        net_name: "CLKbb"
+        num_bits: 1
+      BP:
+        direction: input
+        net_name: "VDD"
+        num_bits: 1
+      S:
+        direction: inputOutput
+        net_name: "Qb"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "D1b"
+        num_bits: 1
+  XTG_M<1>:
+    lib_name: bag2_analog
+    cell_name: switch_mos
+    instpins:
+      BN:
+        direction: input
+        net_name: "VSS"
+        num_bits: 1
+      CTRLb:
+        direction: input
+        net_name: "CLKb"
+        num_bits: 1
+      CTRL:
+        direction: input
+        net_name: "CLKbb"
+        num_bits: 1
+      BP:
+        direction: input
+        net_name: "VDD"
+        num_bits: 1
+      S:
+        direction: inputOutput
+        net_name: "D1"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "net5"
         num_bits: 1
