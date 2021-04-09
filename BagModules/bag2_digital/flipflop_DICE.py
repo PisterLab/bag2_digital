@@ -33,28 +33,37 @@ class bag2_digital__flipflop_DICE(Module):
             dictionary from parameter names to descriptions.
         """
         return dict(
+            diff_clk='True to have a differential input clock',
+            pos_edge='True to trigger on a rising edge (single-ended clock only)',
             master_params = 'Master D latch parameters',
             slave_params = 'Slave D latch parameters',
             inv_params = 'Clock inverter parameters',
-            diff_clk = 'True to have a differential input clock',
         )
 
     def design(self, **params):
         """
         """
+        diff_clk = params['diff_clk']
+        pos_edge = params['pos_edge']
         master_params = params['master_params']
         slave_params = params['slave_params']
         inv_params = params['inv_params']
-        diff_clk = params['diff_clk']
 
         ### Case 1: Single-ended clock (negative edge triggered)
         if not diff_clk:
             # Remove unnecessary pins and clock buffers
-            self.remove_pin('CLK_IN')
-            self.delete_instance('XINV_CLK')
+            pin_rm = 'CLKb_IN' if pos_edge else 'CLK_IN'
+            self.remove_pin(pin_rm)
+            self.delete_instance('XINV_CLKb')
 
             # Design clock buffer
-            self.instances['XINV_CLKb'].design(stack_n=1, stack_p=1, **inv_params)
+            self.instances['XINV_CLK'].design(stack_n=1, stack_p=1, **inv_params)
+
+            # Rewiring the clock buffer
+            buf_conn_dict = {'in' : 'CLK_IN' if pos_edge else 'CLKb_IN',
+                             'out' : 'CLKb' if pos_edge else 'CLKbb'}
+            for pin, net in buf_conn_dict.items():
+                self.reconnect_instance_terminal('XINV_CLK', pin, net)
 
             # Replace the latches to not have differential clock
             self.replace_instance_master(inst_name='XM',
@@ -66,20 +75,20 @@ class bag2_digital__flipflop_DICE(Module):
 
             # Reconnect the latches
             master_conn_dict = dict(D='D_IN',
-                                    CLK='CLKb_IN',
+                                    CLK='CLKb' if pos_edge else 'CLKb_in',
                                     Q='Qm',
                                     VDD='VDD',
                                     VSS='VSS')
 
-            slave_conn_dict = dict(D='D_IN',
-                                   CLK='CLKbb',
-                                   Q='Qm',
+            slave_conn_dict = dict(D='Qm',
+                                   CLK='CLK_IN' if pos_edge else 'CLKbb',
+                                   Q='Q_OUT',
                                    VDD='VDD',
                                    VSS='VSS')
 
             for pin, net in master_conn_dict.items():
                 self.reconnect_instance_terminal('XM', pin, net)
-            for pn, net in slave_conn_dict.items():
+            for pin, net in slave_conn_dict.items():
                 self.reconnect_instance_terminal('XS', pin, net)
 
         ### Case 2: Differential clock
