@@ -1,0 +1,160 @@
+lib_name: bag2_digital
+cell_name: clkgen_nonoverlap
+pins: [ "VDD", "VSS", "PHI1_OUT", "CLK_IN", "PHI2_OUT" ]
+instances:
+  XINV_IN:
+    lib_name: bag2_digital
+    cell_name: inv
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "CLKb"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "CLK_IN"
+        num_bits: 1
+  XNANDB:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "MB"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net11"
+        num_bits: 1
+  XNANDA:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "MA"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net13"
+        num_bits: 1
+  XBUFB:
+    lib_name: bag2_digital
+    cell_name: inv_chain
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "FA"
+        num_bits: 1
+      outb:
+        direction: output
+        net_name: "PHI2_OUT"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "MB"
+        num_bits: 1
+  XBUFA:
+    lib_name: bag2_digital
+    cell_name: inv_chain
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "FB"
+        num_bits: 1
+      outb:
+        direction: output
+        net_name: "PHI1_OUT"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "MA"
+        num_bits: 1
+  XSW_IN:
+    lib_name: bag2_analog
+    cell_name: switch_mos
+    instpins:
+      BN:
+        direction: input
+        net_name: "VSS"
+        num_bits: 1
+      CTRLb:
+        direction: input
+        net_name: "VSS"
+        num_bits: 1
+      CTRL:
+        direction: input
+        net_name: "VDD"
+        num_bits: 1
+      BP:
+        direction: input
+        net_name: "VDD"
+        num_bits: 1
+      S:
+        direction: inputOutput
+        net_name: "CLKx"
+        num_bits: 1
+      D:
+        direction: inputOutput
+        net_name: "CLK_IN"
+        num_bits: 1
+  PIN1:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN0:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN2:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN4:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN3:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
