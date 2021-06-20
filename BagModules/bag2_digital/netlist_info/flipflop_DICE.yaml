@@ -76,7 +76,7 @@ instances:
     instpins:
       CLKb:
         direction: input
-        net_name: "CLKb"
+        net_name: "CLKb_IN"
         num_bits: 1
       VSS:
         direction: inputOutput
@@ -128,7 +128,7 @@ instances:
         num_bits: 1
       CLK:
         direction: input
-        net_name: "CLKb_IN"
+        net_name: "CLKb"
         num_bits: 1
       D:
         direction: input

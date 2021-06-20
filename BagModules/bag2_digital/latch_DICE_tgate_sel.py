@@ -9,21 +9,21 @@ from bag.design.module import Module
 
 
 # noinspection PyPep8Naming
-class bag2_digital__latch_DICE_tgate(Module):
-    """Module for library bag2_digital cell latch_DICE_tgate.
+class bag2_digital__latch_DICE_tgate_sel(Module):
+    """Module for library bag2_digital cell latch_DICE_tgate_sel.
 
     Fill in high level description here.
     """
     yaml_file = pkg_resources.resource_filename(__name__,
                                                 os.path.join('netlist_info',
-                                                             'latch_DICE_tgate.yaml'))
+                                                             'latch_DICE_tgate_sel.yaml'))
 
 
     def __init__(self, database, parent=None, prj=None, **kwargs):
         Module.__init__(self, database, self.yaml_file, parent=parent, prj=prj, **kwargs)
 
     @classmethod
-    def get_params_info(cls) -> Mapping[str, str]:
+    def get_params_info(cls):
         # type: () -> Dict[str, str]
         """Returns a dictionary from parameter names to descriptions.
 
@@ -62,8 +62,31 @@ class bag2_digital__latch_DICE_tgate(Module):
         th_dict = params['th_dict']
         seg_dict = params['seg_dict']
 
-        inst_key_map = dict(N4='sw',
-                            N5='sw')
+        # Remove any unnecessary clock pins
+        if sw_type == 'p':
+            self.remove_pin('CLKb')
+        elif sw_type == 'n':
+            self.remove_pin('CLK')
+
+        # Design switches
+        sw_params_dict = dict()
+        if sw_type != 'p':
+            n_params_dict = dict(nf=seg_dict['sw_n'],
+                                 w=w_dict['sw_n'],
+                                 l=l_dict['sw_n'],
+                                 intent=th_dict['sw_n'])
+            sw_params_dict['n'] = n_params_dict
+        if sw_type != 'n':
+            p_params_dict = dict(nf=seg_dict['sw_p'],
+                                 w=w_dict['sw_p'],
+                                 l=l_dict['sw_p'],
+                                 intent=th_dict['sw_p'])
+            sw_params_dict['p'] = p_params_dict
+        self.instances['XSW4'].design(mos_type=sw_type, mos_params_dict=sw_params_dict)
+        self.instances['XSW5'].design(mos_type=sw_type, mos_params_dict=sw_params_dict)
+
+        inst_key_map = dict()
+        # Design other transistors
         for i in range(4):
             inst_key_map[f'N{i}'] = 'latch_n'
             inst_key_map[f'P{i}'] = 'latch_p'
@@ -74,3 +97,4 @@ class bag2_digital__latch_DICE_tgate(Module):
                                  intent=th_dict[k],
                                  nf=seg_dict[k])
             self.instances[inst].design(**device_params)
+

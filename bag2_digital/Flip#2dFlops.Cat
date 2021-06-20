@@ -1,0 +1,5 @@
+TDMCHECKPOINT="1.0"
+bag2_digital/flipflop_DICE type="cell"
+bag2_digital/flipflop_D_inv type="cell"
+bag2_digital/flipflop_D_nand type="cell"
+keepEmptyCategory type="unknown"

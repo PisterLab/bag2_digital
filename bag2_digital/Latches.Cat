@@ -1,0 +1,7 @@
+TDMCHECKPOINT="1.0"
+bag2_digital/latch_D type="cell"
+bag2_digital/latch_DICE_clk type="cell"
+bag2_digital/latch_DICE_clk_sel type="cell"
+bag2_digital/latch_DICE_tgate type="cell"
+bag2_digital/latch_SbRb type="cell"
+keepEmptyCategory type="unknown"

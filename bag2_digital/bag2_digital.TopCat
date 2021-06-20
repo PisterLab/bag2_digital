@@ -1,0 +1,4 @@
+TDMCHECKPOINT="1.0"
+bag2_digital/Combinational.Cat type="category"
+bag2_digital/Flip#2dFlops.Cat type="category"
+bag2_digital/Latches.Cat type="category"

@@ -1,0 +1,7 @@
+TDMCHECKPOINT="1.0"
+bag2_digital/inv type="cell"
+bag2_digital/inv_chain type="cell"
+bag2_digital/inv_tristate type="cell"
+bag2_digital/nand type="cell"
+bag2_digital/nor type="cell"
+keepEmptyCategory type="unknown"

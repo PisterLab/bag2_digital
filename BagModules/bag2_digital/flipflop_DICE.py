@@ -33,69 +33,115 @@ class bag2_digital__flipflop_DICE(Module):
             dictionary from parameter names to descriptions.
         """
         return dict(
-            diff_clk='True to have a differential input clock',
+            latch_type = 'inv or tgate for inverter-based or transmission gate latch',
+            diff_clk='True to have a differential input clock (if applicable',
             pos_edge='True to trigger on a rising edge (single-ended clock only)',
-            master_params = 'Master D latch parameters',
-            slave_params = 'Slave D latch parameters',
+            latch_params = 'Latch parameters',
             inv_params = 'Clock inverter parameters',
         )
 
     def design(self, **params):
         """
         """
+        latch_type = params['latch_type']
         diff_clk = params['diff_clk']
         pos_edge = params['pos_edge']
-        master_params = params['master_params']
-        slave_params = params['slave_params']
+        latch_params = params['latch_params']
         inv_params = params['inv_params']
 
-        ### Case 1: Single-ended clock (negative edge triggered)
+        latch_clk = True
+        latch_clkb = True
+
+        assert latch_type in ('inv', 'tgate'), "Latch type must be inv or tgate"
+        if latch_type == 'tgate':
+            self.replace_instance_master('XM', 'bag2_digital', 'latch_DICE_tgate_sel')
+            self.replace_instance_master('XS', 'bag2_digital', 'latch_DICE_tgate_sel')
+            if latch_params['sw_type'] != 'both':
+                diff_clk = False
+                latch_clk = latch_params['sw_type'] == 'n'
+                latch_clkb = latch_params['sw_type'] = 'p'
+
+        ### Case 1: Single-ended clock
         if not diff_clk:
-            # Remove unnecessary pins and clock buffers
+            # Remove unnecessary pin
             pin_rm = 'CLKb_IN' if pos_edge else 'CLK_IN'
             self.remove_pin(pin_rm)
-            self.delete_instance('XINV_CLKb')
 
-            # Design clock buffer
-            self.instances['XINV_CLK'].design(stack_n=1, stack_p=1, **inv_params)
+            # Rewire clock buffers
+            master_clk_conn = 'CLKb' if pos_edge else 'CLK_IN'
+            master_clkb_conn = 'CLK_IN' if pos_edge else 'CLKb'
+            slave_clk_conn = 'CLKbb' if pos_edge else 'CLKb'
+            slave_clkb_conn = 'CLKb' if pos_edge else 'CLKbb'
+            if pos_edge:
+                self.reconnect_instance_terminal('XINV_CLKb', 'in', 'CLKb')
+                # self.reconnect_instance_terminal('XM', 'CLK', 'CLKb')
+            else:
+                self.reconnect_instance_terminal('XINV_CLK', 'in', 'CLKbb')
+                # self.reconnect_instance_terminal('XM', 'CLKb', 'CLK')
 
-            # Rewiring the clock buffer
-            buf_conn_dict = {'in' : 'CLK_IN' if pos_edge else 'CLKb_IN',
-                             'out' : 'CLKb' if pos_edge else 'CLKbb'}
-            for pin, net in buf_conn_dict.items():
-                self.reconnect_instance_terminal('XINV_CLK', pin, net)
+            self.reconnect_instance_terminal('XM', 'CLK', master_clk_conn)
+            self.reconnect_instance_terminal('XM', 'CLKb', master_clkb_conn)
+            self.reconnect_instance_terminal('XS', 'CLK', slave_clk_conn)
+            self.reconnect_instance_terminal('XS', 'CLKb', slave_clkb_conn)
 
-            # Replace the latches to not have differential clock
-            self.replace_instance_master(inst_name='XM',
-                                         lib_name='bag2_digital',
-                                         cell_name='latch_DICE_clk')
-            self.replace_instance_master(inst_name='XS',
-                                         lib_name='bag2_digital',
-                                         cell_name='latch_DICE_clk')
+        elif not pos_edge:
+            self.reconnect_instance_terminal('XM', 'CLK', 'CLK_IN')
+            self.reconnect_instance_terminal('XM', 'CLKb', 'CLKb')
+            self.reconnect_instance_terminal('XS', 'CLK', 'CLKb_IN')
+            self.reconnect_instance_terminal('XS', 'CLKb', 'CLKbb')
 
-            # Reconnect the latches
-            master_conn_dict = dict(D='D_IN',
-                                    CLK='CLKb' if pos_edge else 'CLKb_in',
-                                    Q='Qm',
-                                    VDD='VDD',
-                                    VSS='VSS')
-
-            slave_conn_dict = dict(D='Qm',
-                                   CLK='CLK_IN' if pos_edge else 'CLKbb',
-                                   Q='Q_OUT',
-                                   VDD='VDD',
-                                   VSS='VSS')
-
-            for pin, net in master_conn_dict.items():
-                self.reconnect_instance_terminal('XM', pin, net)
-            for pin, net in slave_conn_dict.items():
-                self.reconnect_instance_terminal('XS', pin, net)
-
-        ### Case 2: Differential clock
-        else:
-            self.instances['XINV_CLK'].design(stack_n=1, stack_p=1, **inv_params)
-            self.instances['XINV_CLKb'].design(stack_n=1, stack_p=1, **inv_params)
+        # ### Case 1: Single-ended clock (negative edge triggered)
+        # if not diff_clk:
+        #     # Remove unnecessary pins and clock buffers
+        #     pin_rm = 'CLKb_IN' if pos_edge else 'CLK_IN'
+        #     self.remove_pin(pin_rm)
+        #     self.delete_instance('XINV_CLKb')
+        #
+        #     # Design clock buffer
+        #     self.instances['XINV_CLK'].design(stack_n=1, stack_p=1, **inv_params)
+        #
+        #     # Rewiring the clock buffer
+        #     buf_conn_dict = {'in' : 'CLK_IN' if pos_edge else 'CLKb_IN',
+        #                      'out' : 'CLKb' if pos_edge else 'CLKbb'}
+        #     for pin, net in buf_conn_dict.items():
+        #         self.reconnect_instance_terminal('XINV_CLK', pin, net)
+        #
+        #     # Replace the latches to not have differential clock
+        #     if latch_type == 'inv':
+        #         self.replace_instance_master(inst_name='XM',
+        #                                      lib_name='bag2_digital',
+        #                                      cell_name='latch_DICE_clk')
+        #         self.replace_instance_master(inst_name='XS',
+        #                                      lib_name='bag2_digital',
+        #                                      cell_name='latch_DICE_clk')
+        #
+        #     # Reconnect the latches
+        #     master_conn_dict = dict(D='D_IN',
+        #                             CLK='CLKb' if pos_edge else 'CLKb_in',
+        #                             Q='Qm',
+        #                             VDD='VDD',
+        #                             VSS='VSS')
+        #
+        #     slave_conn_dict = dict(D='Qm',
+        #                            CLK='CLK_IN' if pos_edge else 'CLKbb',
+        #                            Q='Q_OUT',
+        #                            VDD='VDD',
+        #                            VSS='VSS')
+        #
+        #     for pin, net in master_conn_dict.items():
+        #         self.reconnect_instance_terminal('XM', pin, net)
+        #     for pin, net in slave_conn_dict.items():
+        #         self.reconnect_instance_terminal('XS', pin, net)
+        #
+        # ### Case 2: Differential clock
+        # else:
+        #     self.instances['XINV_CLK'].design(stack_n=1, stack_p=1, **inv_params)
+        #     self.instances['XINV_CLKb'].design(stack_n=1, stack_p=1, **inv_params)
 
         ### Design latches
-        self.instances['XM'].design(**master_params)
-        self.instances['XS'].design(**slave_params)
+        self.instances['XM'].design(**latch_params)
+        self.instances['XS'].design(**latch_params)
+
+        ### Design buffers
+        self.instances['XINV_CLK'].design(stack_n=1, stack_p=1, **inv_params)
+        self.instances['XINV_CLKb'].design(stack_n=1, stack_p=1, **inv_params)
