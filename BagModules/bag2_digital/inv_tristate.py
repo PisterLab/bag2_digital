@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from typing import Dict
+from warnings import warn
 
 import os
 import pkg_resources
@@ -65,8 +66,8 @@ class bag2_digital__inv_tristate(Module):
         stack_n = nstack_params['stack']
         stack_p = pstack_params['stack']
 
-        assert stack_p > 1, f'P stack height {stack_p} should be > 1'
-        assert stack_n > 1, f'N stack height {stack_n} should be > 1'
+        # assert stack_p > 1, f'P stack height {stack_p} should be > 1'
+        # assert stack_n > 1, f'N stack height {stack_n} should be > 1'
 
         pin_vn = 'VN'
         if stack_n > 2:
@@ -82,4 +83,7 @@ class bag2_digital__inv_tristate(Module):
         if stack_p > 1:            
             self.reconnect_instance_terminal('XP', f'G<{stack_p-1}:0>', pin_vp+',in')
 
-        
+        if stack_p < 2:
+            self.remove_pin('VP')
+        if stack_n < 2:
+            self.remove_pin('VN')

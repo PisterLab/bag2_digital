@@ -1,8 +1,8 @@
 lib_name: bag2_digital
 cell_name: delay_line_inv_starved
-pins: [ "VP", "VN", "VSS", "VDD", "in", "out" ]
+pins: [ "VP", "VN", "VSS", "VDD", "in", "out", "outb" ]
 instances:
-  XINV:
+  XINV1:
     lib_name: bag2_digital
     cell_name: inv_tristate
     instpins:
@@ -28,6 +28,34 @@ instances:
         num_bits: 1
       in:
         direction: input
+        net_name: "outb"
+        num_bits: 1
+  XINV0:
+    lib_name: bag2_digital
+    cell_name: inv_tristate
+    instpins:
+      VP:
+        direction: input
+        net_name: "VP"
+        num_bits: 1
+      VN:
+        direction: input
+        net_name: "VN"
+        num_bits: 1
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "outb"
+        num_bits: 1
+      in:
+        direction: input
         net_name: "in"
         num_bits: 1
   PIN2:
@@ -49,6 +77,10 @@ instances:
   PIN1:
     lib_name: basic
     cell_name: iopin
+    instpins: {}
+  PIN6:
+    lib_name: basic
+    cell_name: opin
     instpins: {}
   PIN3:
     lib_name: basic
