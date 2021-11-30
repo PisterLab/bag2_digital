@@ -94,7 +94,7 @@ class bag2_digital__delay_line_inv_starved(Module):
         elif num_out == 1:
             self.instances['XINV1'].design(**inv_tristate_params)
         else:
-            self.remove_instance('XINV1')
+            self.delete_instance('XINV1')
 
         if num_outb > 1:
             self.array_instance('XINV0', [f'XINV0{suffix_outb}'], [{'in' : f'out{suffix_ins},in', 
