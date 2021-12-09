@@ -1,0 +1,6 @@
+//Verilog HDL for "bag2_digital", "pd_hogge" "functional"
+
+
+module pd_hogge ( );
+
+endmodule

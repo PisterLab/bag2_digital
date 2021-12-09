@@ -1,0 +1,128 @@
+lib_name: bag2_digital
+cell_name: pfd
+pins: [ "VDD", "VSS", "UPb", "UP", "DOWN", "DOWNb", "CLKA", "CLKB" ]
+instances:
+  XNAND:
+    lib_name: bag2_digital
+    cell_name: nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "RSTb"
+        num_bits: 1
+      in:
+        direction: input
+        net_name: "net1"
+        num_bits: 1
+  XDFF<0>:
+    lib_name: bag2_digital
+    cell_name: flipflop_D_nand
+    instpins:
+      CLRb:
+        direction: input
+        net_name: "rstb"
+        num_bits: 1
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      SETb:
+        direction: input
+        net_name: "net3"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      Q:
+        direction: output
+        net_name: "UP"
+        num_bits: 1
+      Qb:
+        direction: output
+        net_name: "UPb"
+        num_bits: 1
+      CLK:
+        direction: input
+        net_name: "CLKA"
+        num_bits: 1
+      D:
+        direction: input
+        net_name: "VDD"
+        num_bits: 1
+  XDFF<1>:
+    lib_name: bag2_digital
+    cell_name: flipflop_D_nand
+    instpins:
+      CLRb:
+        direction: input
+        net_name: "RSTb"
+        num_bits: 1
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      SETb:
+        direction: input
+        net_name: "net2"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      Q:
+        direction: output
+        net_name: "DOWN"
+        num_bits: 1
+      Qb:
+        direction: output
+        net_name: "DOWNb"
+        num_bits: 1
+      CLK:
+        direction: input
+        net_name: "CLKB"
+        num_bits: 1
+      D:
+        direction: input
+        net_name: "VDD"
+        num_bits: 1
+  PIN1:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN0:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN7:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN2:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN6:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN4:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN3:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN5:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}

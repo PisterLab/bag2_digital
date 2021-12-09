@@ -1,0 +1,156 @@
+lib_name: bag2_digital
+cell_name: pd_hogge
+pins: [ "VDD", "VSS", "SETb", "CLRb", "D", "CLK", "D_RETIME", "CLKb", "out_EL", "out_ref" ]
+instances:
+  XDFF<0>:
+    lib_name: bag2_digital
+    cell_name: flipflop_D_nand
+    instpins:
+      CLRb:
+        direction: input
+        net_name: "CLRb"
+        num_bits: 1
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      SETb:
+        direction: input
+        net_name: "SETb"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      Q:
+        direction: output
+        net_name: "mid"
+        num_bits: 1
+      Qb:
+        direction: output
+        net_name: "net2"
+        num_bits: 1
+      CLK:
+        direction: input
+        net_name: "CLK"
+        num_bits: 1
+      D:
+        direction: input
+        net_name: "D"
+        num_bits: 1
+  XDFF<1>:
+    lib_name: bag2_digital
+    cell_name: flipflop_D_nand
+    instpins:
+      CLRb:
+        direction: input
+        net_name: "CLRb"
+        num_bits: 1
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      SETb:
+        direction: input
+        net_name: "SETb"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      Q:
+        direction: output
+        net_name: "D_RETIME"
+        num_bits: 1
+      Qb:
+        direction: output
+        net_name: "net1"
+        num_bits: 1
+      CLK:
+        direction: input
+        net_name: "CLKb"
+        num_bits: 1
+      D:
+        direction: input
+        net_name: "mid"
+        num_bits: 1
+  XOR_REF:
+    lib_name: bag2_digital
+    cell_name: xor_nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "out_ref"
+        num_bits: 1
+      in<1:0>:
+        direction: input
+        net_name: "mid,D_RETIME"
+        num_bits: 2
+  XOR_DATA:
+    lib_name: bag2_digital
+    cell_name: xor_nand
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      out:
+        direction: output
+        net_name: "out_EL"
+        num_bits: 1
+      in<1:0>:
+        direction: input
+        net_name: "D,mid"
+        num_bits: 2
+  PIN1:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN0:
+    lib_name: basic
+    cell_name: iopin
+    instpins: {}
+  PIN5:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN4:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN3:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN2:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN7:
+    lib_name: basic
+    cell_name: ipin
+    instpins: {}
+  PIN9:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN6:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
+  PIN8:
+    lib_name: basic
+    cell_name: opin
+    instpins: {}
