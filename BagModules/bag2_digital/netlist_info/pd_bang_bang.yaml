@@ -1,7 +1,31 @@
 lib_name: bag2_digital
 cell_name: pd_bang_bang
-pins: [ "D", "CLK", "CLKb", "D_RETIME", "out_N", "VDD", "VSS", "out_P" ]
+pins: [ "D", "CLK", "CLKb", "D_RETIME", "T", "VDD", "VSS", "E" ]
 instances:
+  XDFF_OUT<1>:
+    lib_name: bag2_digital
+    cell_name: flipflop_D_inv
+    instpins:
+      VSS:
+        direction: inputOutput
+        net_name: "VSS"
+        num_bits: 1
+      VDD:
+        direction: inputOutput
+        net_name: "VDD"
+        num_bits: 1
+      Q:
+        direction: output
+        net_name: "B"
+        num_bits: 1
+      CLK:
+        direction: input
+        net_name: "CLK"
+        num_bits: 1
+      D:
+        direction: input
+        net_name: "mid"
+        num_bits: 1
   XDFF_IN<0>:
     lib_name: bag2_digital
     cell_name: flipflop_D_inv
@@ -100,7 +124,7 @@ instances:
         num_bits: 1
       out:
         direction: output
-        net_name: "out_N"
+        net_name: "E"
         num_bits: 1
       in<1:0>:
         direction: input
@@ -120,7 +144,7 @@ instances:
         num_bits: 1
       out:
         direction: output
-        net_name: "out_P"
+        net_name: "T"
         num_bits: 1
       in<1:0>:
         direction: input
@@ -146,31 +170,3 @@ instances:
     lib_name: basic
     cell_name: iopin
     instpins: {}
-  XLATCH:
-    lib_name: bag2_digital
-    cell_name: latch_D
-    instpins:
-      CLK:
-        direction: input
-        net_name: "CLKb"
-        num_bits: 1
-      VSS:
-        direction: inputOutput
-        net_name: "VSS"
-        num_bits: 1
-      VDD:
-        direction: inputOutput
-        net_name: "VDD"
-        num_bits: 1
-      Q:
-        direction: output
-        net_name: "B"
-        num_bits: 1
-      Qb:
-        direction: output
-        net_name: "net1"
-        num_bits: 1
-      D:
-        direction: input
-        net_name: "mid"
-        num_bits: 1
