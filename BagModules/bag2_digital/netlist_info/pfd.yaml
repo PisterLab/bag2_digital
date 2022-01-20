@@ -28,7 +28,7 @@ instances:
     instpins:
       CLRb:
         direction: input
-        net_name: "rstb"
+        net_name: "RSTb"
         num_bits: 1
       VSS:
         direction: inputOutput

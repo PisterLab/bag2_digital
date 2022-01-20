@@ -53,6 +53,9 @@ class bag2_digital__pfd(Module):
         restore_instance()
         array_instance()
         """
-        self.instances['XNAND'].design(**nand_params)
+        nand_params = params['nand_params']
+        dff_params = params['dff_params']
+        
+        self.instances['XNAND'].design(**nand_params, num_in=2)
         self.instances['XDFF<0>'].design(**dff_params, has_set=False)
         self.instances['XDFF<1>'].design(**dff_params, has_set=False)
