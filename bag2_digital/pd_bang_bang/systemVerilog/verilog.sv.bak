@@ -1,7 +1,7 @@
 //systemVerilog HDL for "bag2_digital", "pd_bang_bang" "systemVerilog"
 
 
-module pd_bang_bang ( D_RETIME, out_P, out_N, VDD, VSS, CLK, CLKb, D );
+module pd_bang_bang ( D_RETIME, T, E, VDD, VSS, CLK, CLKb, D );
 
   input CLK;
   input CLKb;
